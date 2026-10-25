@@ -6,6 +6,7 @@ dist/
 !.env.example
 .obsidian/
 tmp/
+state/
 
 # Local logs and tool caches
 *.log
