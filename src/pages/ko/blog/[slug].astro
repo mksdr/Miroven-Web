@@ -1,0 +1,17 @@
+---
+import { render } from 'astro:content';
+import Article from '../../../layouts/Article.astro';
+import { publishedPosts, formatDate } from '../../../lib/blog';
+export async function getStaticPaths() {
+  return (await publishedPosts()).map(post => ({ params: { slug: post.id.split('/').pop() }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<Article title={post.data.title} description={post.data.description} eyebrow={post.data.category}>
+  <p slot="meta" class="post-meta"><time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time> · {post.data.author}</p>
+  <Content />
+  <hr />
+  <p class="post-license muted"><small>이 글은 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.ko" target="_blank" rel="noopener noreferrer">CC BY-NC 4.0</a> 라이선스에 따라 자유롭게 공유할 수 있습니다 (저작자 표시, 비영리 목적 한정).</small></p>
+  <a href="/ko/blog/">← 블로그 목록으로</a>
+</Article>

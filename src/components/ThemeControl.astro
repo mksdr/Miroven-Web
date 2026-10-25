@@ -1,0 +1,13 @@
+---
+import Icon from './Icon.astro';
+const english = Astro.url.pathname.startsWith('/en/');
+---
+<label class="theme-control" hidden>
+  <Icon name="display" />
+  <span class="sr-only">{english ? 'Color theme' : '화면 테마'}</span>
+  <select id="site-theme" aria-label={english ? 'Color theme' : '화면 테마'}>
+    <option value="system">{english ? 'System' : '시스템 설정'}</option>
+    <option value="light">{english ? 'Light' : '밝은 화면'}</option>
+    <option value="dark">{english ? 'Dark' : '어두운 화면'}</option>
+  </select>
+</label>

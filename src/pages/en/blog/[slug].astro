@@ -1,0 +1,17 @@
+---
+import { render } from 'astro:content';
+import Article from '../../../layouts/Article.astro';
+import { publishedPosts, formatDate } from '../../../lib/blog';
+export async function getStaticPaths() {
+  return (await publishedPosts('en')).map(post => ({ params: { slug: post.id.split('/').pop() }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<Article title={post.data.title} description={post.data.description} eyebrow={post.data.category}>
+  <p slot="meta" class="post-meta"><time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt, 'en')}</time> · {post.data.author}</p>
+  <Content />
+  <hr />
+  <p class="post-license muted"><small>This article is available under <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en" target="_blank" rel="noopener noreferrer">CC BY-NC 4.0</a> (attribution required, noncommercial use only).</small></p>
+  <a href="/en/blog/">← Back to the blog</a>
+</Article>

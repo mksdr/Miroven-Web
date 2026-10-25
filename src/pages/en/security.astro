@@ -1,0 +1,10 @@
+---
+import Article from '../../layouts/Article.astro';
+---
+<Article title="Keeping your journal safe" description="A transparent guide to what Miroven protects and what you need to watch out for." eyebrow="Security and privacy">
+  <h2>Encryption starts on your device</h2><p>Miroven encrypts entries and photos on your device. Sync sends ciphertext to the server. Plaintext entries, photos, PINs, recovery codes, and keys capable of decrypting your vault are not sent to the API.</p>
+  <h2>Some information is visible to the server</h2><p>The server may see metadata needed to operate the service, such as your account email, access and modification times, and ciphertext sizes. Encryption does not eliminate all information processing.</p>
+  <h2>The limits of encryption</h2><p>Encryption cannot protect against every risk, including a modified client, malicious scripts, or access to an unlocked device. Keep your device and browser secure, and do not share your recovery code.</p>
+  <h2>Prepare separately for recovery</h2><p>Signing in does not recover your vault. Store a file backup and your recovery code safely in case your browser storage is cleared or you lose your device.</p>
+  <h2>Reporting vulnerabilities and the scope of verification</h2><p>Report vulnerabilities through <a href="https://github.com/mksdr/Miroven/security/advisories/new">GitHub private vulnerability reporting</a>. If private reporting is unavailable, ask the maintainer for a private contact channel without publishing exploitation details. Use synthetic data in reports. Do not send real entries, photos, recovery codes, PINs, encryption keys, or authentication credentials. We do not claim to have completed an independent security audit, and do not separately guarantee response deadlines or a security maintenance schedule.</p>
+</Article>

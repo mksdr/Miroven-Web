@@ -1,0 +1,7 @@
+---
+import { localeFromPath } from '../i18n';
+const locale = localeFromPath(Astro.url.pathname);
+interface Props { linked?: boolean; }
+const { linked = true } = Astro.props;
+---
+{linked ? <a class="brand" href={'/' + locale + '/'} aria-label={locale === 'en' ? 'Miroven home' : 'Miroven 홈'}><span class="brand-mark" aria-hidden="true">M</span><span>Miroven</span></a> : <span class="brand"><span class="brand-mark" aria-hidden="true">M</span><span>Miroven</span></span>}

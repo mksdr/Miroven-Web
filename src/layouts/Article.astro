@@ -1,0 +1,11 @@
+---
+import Base from './Base.astro';
+import { localeFromPath } from '../i18n';
+const locale = localeFromPath(Astro.url.pathname);
+const english = locale === 'en';
+interface Props { title: string; description: string; eyebrow?: string; noindex?: boolean; }
+const { title, description, eyebrow = english ? 'Guide' : '안내', noindex = false } = Astro.props;
+---
+<Base title={title} description={description} noindex={noindex}>
+  <div class="article wrap"><a class="text-link article-back" href={'/' + locale + '/'}>← {english ? 'Miroven home' : 'Miroven 홈'}</a><article><header class="article-header"><p class="eyebrow">{eyebrow}</p><h1>{title}</h1><p class="lead">{description}</p><slot name="meta" /></header><div class="prose"><slot /></div></article></div>
+</Base>

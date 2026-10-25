@@ -1,0 +1,55 @@
+---
+import Icon from './Icon.astro';
+const english = Astro.url.pathname.startsWith('/en/');
+const t = (ko: string, en: string) => english ? en : ko;
+---
+<figure class="product-preview" aria-labelledby="preview-caption">
+  <div class="preview-top">
+    <div class="preview-window-head">
+      <span class="preview-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="preview-window-title">{t('Miroven — 개인 타임라인', 'Miroven — Personal timeline')}</span>
+    </div>
+    <span class="preview-encrypted"><Icon name="lock" />{t('기기 내 암호화', 'Encrypted on device')}</span>
+  </div>
+  <div class="preview-workspace">
+    <div class="preview-rail" aria-hidden="true">
+      <span class="brand-mark">M</span>
+      <span class="preview-nav selected"><Icon name="home" /><span>{t('기록', 'Journal')}</span></span>
+      <span class="preview-nav"><Icon name="search" /><span>{t('검색', 'Search')}</span></span>
+      <span class="preview-nav"><Icon name="display" /><span>{t('화면', 'Display')}</span></span>
+      <span class="preview-rail-note"><Icon name="shield" /><span>{t('로컬 금고', 'Local vault')}</span></span>
+    </div>
+    <div class="preview-timeline">
+      <div class="preview-composer">
+        <span class="preview-avatar" aria-hidden="true">{t('나', 'Me')}</span>
+        <div class="preview-composer-body">
+          <p>{t('오늘 남겨두고 싶은 생각이나 순간이 있나요?', 'Any thoughts or moments to keep today?')}</p>
+          <div class="preview-composer-meta">
+            <span>{t('10월 24일 · 오후 10:40', 'October 24 · 10:40 PM')}</span>
+            <span>{t('로컬 금고 자동 잠금', 'Local vault auto-lock')}</span>
+          </div>
+        </div>
+      </div>
+      <div class="preview-entry">
+        <span class="preview-avatar" aria-hidden="true">{t('나', 'Me')}</span>
+        <div>
+          <p class="preview-author"><strong>{t('10월 17일 목요일', 'Thursday, October 17')}</strong><span>{t('오후 6:15 · 기기 보관', '6:15 PM · Stored on device')}</span></p>
+          <p>{t('조금 돌아가는 산책길을 골랐다. 바람이 선선했고, 가로수 사이로 비치는 저녁 빛이 마음에 들었다. 이런 작은 순간을 잊지 않고 싶어서 짧은 메모를 남긴다.', 'I took the longer way on my walk. The air was cool, and I loved the evening light between the trees. A short note to remember this small moment.')}</p>
+          <div class="preview-tags">
+            <span class="preview-tag">{t('#산책', '#walk')}</span>
+            <span class="preview-tag">{t('#일상의조각', '#everyday')}</span>
+          </div>
+        </div>
+      </div>
+      <div class="preview-entry preview-last">
+        <span class="preview-avatar alternate" aria-hidden="true">{t('나', 'Me')}</span>
+        <div>
+          <p class="preview-author"><strong>{t('10월 16일 수요일', 'Wednesday, October 16')}</strong><span>{t('오후 11:02 · 암호문 동기화', '11:02 PM · Encrypted sync')}</span></p>
+          <p>{t('해야 할 일 목록보다, 오늘 무사히 해낸 일을 먼저 적어보기로 했다.', 'Instead of another to-do list, I decided to write down what I managed to do today.')}</p>
+          <blockquote>{t('누구에게도 보여주지 않아도 되는 공간이 있을 때, 생각은 비로소 솔직해진다.', 'Thoughts become honest when there is a space you do not have to show anyone.')}</blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+  <figcaption id="preview-caption">{t('합성 기록으로 구성한 화면 예시입니다. 홈페이지에서는 기록을 입력하거나 저장하지 않습니다.', 'An illustrative preview with synthetic entries. This website does not accept or store journal entries.')}</figcaption>
+</figure>

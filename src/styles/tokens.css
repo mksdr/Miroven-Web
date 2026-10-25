@@ -1,0 +1,62 @@
+/* Website implementation of the documented Miroven visual palette. */
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-subtle: #fafbfb;
+  --card: #f6f8f9;
+  --card-hover: #eef2f4;
+  --text: #0f1419;
+  --text-secondary: #33414d;
+  --muted: #536471;
+  --border: #e6ecef;
+  --border-strong: #d5dfe4;
+  --accent: #1d9bf0;
+  --accent-link: #0872b4;
+  --accent-soft: #e8f5fe;
+  --btn-accent-bg: #0c7abf;
+  --btn-accent-hover: #0869a6;
+  --accent-text: #ffffff;
+  --success: #007e54;
+  --hover: rgba(15, 20, 25, .045);
+  --radius: 14px;
+  --radius-small: 8px;
+  --content-width: 1160px;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #000000;
+  --surface: #0a0c0f;
+  --surface-subtle: #0d1014;
+  --card: #12151a;
+  --card-hover: #191d24;
+  --text: #e7e9ea;
+  --text-secondary: #c4cbd2;
+  --muted: #8b98a5;
+  --border: #202428;
+  --border-strong: #333940;
+  --accent-link: #5ab9f5;
+  --accent-soft: #071d2c;
+  --success: #00ba7c;
+  --hover: rgba(231, 233, 234, .07);
+}
+/* System theme also works when JavaScript is disabled or blocked. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme='dark']) {
+    color-scheme: dark;
+    --bg: #000000;
+    --surface: #0a0c0f;
+    --surface-subtle: #0d1014;
+    --card: #12151a;
+    --card-hover: #191d24;
+    --text: #e7e9ea;
+    --text-secondary: #c4cbd2;
+    --muted: #8b98a5;
+    --border: #202428;
+    --border-strong: #333940;
+    --accent-link: #5ab9f5;
+    --accent-soft: #071d2c;
+    --success: #00ba7c;
+    --hover: rgba(231, 233, 234, .07);
+  }
+}

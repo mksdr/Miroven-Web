@@ -1,0 +1,12 @@
+---
+import Article from '../../layouts/Article.astro';
+import { site } from '../../config/site';
+---
+<Article title="Getting started with Miroven" description="Learn how to start journaling, keep your entries safe, and continue on another device." eyebrow="Getting started">
+  <h2>Can I use Miroven without signing in?</h2><p>You can write and search entries locally in the <a href={site.appUrl}>official Miroven app</a> without an account. Connect an account to sync with other devices.</p>
+  <h2>How is signing in different from unlocking a vault?</h2><p>Signing in gives you access to your sync account. Unlocking a vault opens your encrypted entries on your device. Access to your email alone cannot decrypt your entries.</p>
+  <h2>Why do I need a backup?</h2><p>Keep a file backup and your recovery code separately in case your browser data is cleared or you lose your device. Regular backups are recommended whether or not you use sync.</p>
+  <h2>Are the website and the app separate sites?</h2><p>The official website provides product information and guides. You write entries and manage your vault in the Miroven app on a separate domain. Do not enter personal journal content on this website.</p>
+  <h2>Does deleting my account delete every copy of my entries?</h2><p>Deleting a server account and resetting a local vault are separate actions. Account deletion also removes the vault synced with that account on your current device. You must separately delete local entries on other devices and backups you have exported. See the <a href="/en/privacy/#retention">Privacy Policy</a> for server backup retention periods.</p>
+  <h2>Learn more</h2><p><a href="/en/security/">Encryption coverage and limitations</a> · <a href="/en/blog/">Guides and product stories</a></p>
+</Article>

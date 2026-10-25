@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import PostCard from '../../components/PostCard.astro';
+import ProductPreview from '../../components/ProductPreview.astro';
+import { site } from '../../config/site';
+import { publishedPosts } from '../../lib/blog';
+const posts = (await publishedPosts('en')).slice(0, 3);
+const features = [
+  { number: '01', label: 'Local first', title: 'A timeline for your thoughts', description: 'Keep thoughts and photos in order, without complicated folders or forms. Start writing in your browser without signing up or signing in.' },
+  { number: '02', label: 'On-device encryption', title: 'A vault secured on your device', description: 'Entries and attached photos are encrypted on your device first. Keep encrypted backup files and your recovery code in case your browser data is cleared or you lose your device.' },
+  { number: '03', label: 'Optional sync', title: 'Connect when you need to', description: 'Connect an account to sync encrypted records when you want to continue on other devices. Account sign-in and vault unlocking are separate: email verification alone cannot open your journal.' },
+];
+---
+<Base>
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="hero-kicker">Personal journal · Local first</p>
+      <h1>Your thoughts today.<br />Your own space to keep them.</h1>
+      <p class="hero-description">From passing thoughts to moments worth keeping. Miroven is a personal journal that encrypts entries and photos on your device first.</p>
+      <div class="hero-actions">
+        <Button href={site.appUrl} arrow>Start your journal</Button>
+        <Button href="/en/help/" secondary>Getting started</Button>
+      </div>
+      <dl class="hero-specs">
+        <div>
+          <dt>Get started</dt>
+          <dd>Write without signing in</dd>
+        </div>
+        <div>
+          <dt>Protection</dt>
+          <dd>Encrypt on your device first</dd>
+        </div>
+        <div>
+          <dt>Connect devices</dt>
+          <dd>Optional encrypted sync</dd>
+        </div>
+      </dl>
+    </div>
+    <ProductPreview />
+  </section>
+
+  <section id="about" class="section about-section">
+    <div class="wrap about-grid">
+      <div class="about-intro">
+        <p class="eyebrow">Made for everyday journaling</p>
+        <h2>Write, reflect,<br />and keep what matters.</h2>
+        <p>A familiar timeline makes it simple to capture your day. Every step of storage and sync is designed around your device.</p>
+      </div>
+      <div class="features">
+        {features.map(feature => (
+          <div class="feature">
+            <div class="feature-meta">
+              <span class="feature-number">{feature.number}</span>
+              <span class="feature-label">{feature.label}</span>
+            </div>
+            <div class="feature-body">
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="privacy-section">
+    <div class="wrap privacy-grid">
+      <div class="privacy-copy">
+        <p class="eyebrow">Clear privacy boundaries</p>
+        <h2>Know what is protected.<br />Write with confidence.</h2>
+        <p>Your entries and photos are encrypted on your device before transmission. Encryption does not hide everything, so we also explain the operational metadata the server processes and the precautions to take.</p>
+        <p>Store encrypted backups and your recovery code separately in case browser storage is cleared or your device is lost.</p>
+        <a class="text-link" href="/en/security/">Explore protection and limitations<Icon name="arrow" /></a>
+      </div>
+      <div class="privacy-matrix" aria-label="Data protection summary">
+        <div class="matrix-card">
+          <div class="matrix-head protected">
+            <Icon name="lock" />
+            <strong>Protected locally (no plaintext sent to server)</strong>
+          </div>
+          <ul>
+            <li>Journal text, tags, and profile information</li>
+            <li>Original photos and thumbnails</li>
+            <li>App lock PINs, recovery codes, and vault keys capable of decryption</li>
+          </ul>
+        </div>
+        <div class="matrix-card">
+          <div class="matrix-head">
+            <Icon name="shield" />
+            <strong>Operational information visible during sync</strong>
+          </div>
+          <ul>
+            <li>Account email, authentication, and session status</li>
+            <li>Access and sync request times, and change sequence</li>
+            <li>Encrypted data identifiers and ciphertext sizes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-row">
+      <div>
+        <p class="eyebrow">Archive</p>
+        <h2>Stories alongside your journal</h2>
+      </div>
+      <a class="text-link" href="/en/blog/">View all articles<Icon name="arrow" /></a>
+    </div>
+    <div class="post-grid">{posts.map(post => <PostCard post={post} />)}</div>
+  </section>
+
+  <section class="closing wrap">
+    <div class="closing-inner">
+      <div>
+        <h2>A day you want to remember?</h2>
+        <p>Start today’s entry in the official Miroven app.</p>
+      </div>
+      <Button href={site.appUrl} arrow>Start your journal</Button>
+    </div>
+  </section>
+</Base>

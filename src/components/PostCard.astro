@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { postUrl, formatDate } from '../lib/blog';
+import Icon from './Icon.astro';
+const english = Astro.url.pathname.startsWith('/en/');
+interface Props { post: CollectionEntry<'blog'>; heading?: 'h2' | 'h3'; }
+const { post, heading: Heading = 'h3' } = Astro.props;
+---
+<a class="post-card" href={postUrl(post.id)}>
+  <div class="post-card-meta">
+    <span class="post-category">{post.data.category}</span>
+    <span class="meta-sep" aria-hidden="true">·</span>
+    <time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt, post.data.locale)}</time>
+  </div>
+  <Heading>{post.data.title}</Heading>
+  <p>{post.data.description}</p>
+  <span class="post-read">{english ? 'Read article' : '글 읽기'} <Icon name="arrow" /></span>
+</a>

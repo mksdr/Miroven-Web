@@ -1,0 +1,22 @@
+---
+import Brand from './Brand.astro';
+import Button from './Button.astro';
+import ThemeControl from './ThemeControl.astro';
+import { site } from '../config/site';
+import { messages, localeFromPath } from '../i18n';
+const locale = localeFromPath(Astro.url.pathname);
+const ko = messages[locale];
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/' + locale + '/#about', label: ko.navigation.product, current: false },
+  { href: '/' + locale + '/blog/', label: ko.navigation.blog, current: path.startsWith('/' + locale + '/blog/') },
+  { href: '/' + locale + '/help/', label: ko.navigation.help, current: path === '/' + locale + '/help/' },
+];
+---
+<header class="site-header">
+  <div class="header wrap">
+    <Brand />
+    <nav aria-label={locale === 'en' ? 'Main navigation' : '주 메뉴'}>{nav.map(({ href, label, current }) => <a href={href} aria-current={current ? 'page' : undefined}>{label}</a>)}</nav>
+    <div class="header-end"><ThemeControl /><Button href={site.appUrl} small arrow>{ko.app}</Button></div>
+  </div>
+</header>

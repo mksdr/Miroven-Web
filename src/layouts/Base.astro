@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+import { localeFromPath } from '../i18n';
+const locale = localeFromPath(Astro.url.pathname);
+const english = locale === 'en';
+import { site } from '../config/site';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+interface Props { title?: string; description?: string; noindex?: boolean; }
+const { title, description = english ? 'A personal journal that encrypts entries and photos on your device. Keep your everyday moments in your own space.' : site.description, noindex = false } = Astro.props;
+const pageTitle = title ? `${title} · Miroven` : (english ? 'Miroven — Your journal, your space' : 'Miroven — 나만의 기록, 나만의 공간');
+const canonical = site.url ? new URL(Astro.url.pathname, site.url).href : undefined;
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <script is:inline src="/theme-init.js"></script>
+    <meta name="robots" content={noindex || !site.url ? 'noindex, nofollow' : 'index, follow'} />
+    <title>{pageTitle}</title>
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={english ? 'en_US' : 'ko_KR'} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {site.url && <link rel="alternate" type="application/rss+xml" title={english ? 'Miroven Blog' : 'Miroven 블로그'} href={english ? '/rss-en.xml' : '/rss.xml'} />}
+  </head>
+  <body>
+    <a class="skip" href="#main">{english ? 'Skip to content' : '본문으로 건너뛰기'}</a>
+    <SiteHeader />
+    <main id="main" tabindex="-1"><slot /></main>
+    <SiteFooter />
+  </body>
+</html>

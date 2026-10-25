@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import PostCard from '../../components/PostCard.astro';
+import ProductPreview from '../../components/ProductPreview.astro';
+import { site } from '../../config/site';
+import { publishedPosts } from '../../lib/blog';
+const posts = (await publishedPosts()).slice(0, 3);
+const features = [
+  { number: '01', label: '로컬 우선 작성', title: '떠오르는 대로 남기는 타임라인', description: '복잡한 폴더나 양식 없이 생각과 사진을 시간순으로 이어 적습니다. 회원가입이나 로그인 없이도 현재 기기의 브라우저에서 곧바로 기록을 시작할 수 있습니다.' },
+  { number: '02', label: '기기 내 암호화', title: '내 기기에서 먼저 잠그는 금고', description: '작성한 기록과 첨부한 사진은 기기 안에서 먼저 암호화합니다. 브라우저 데이터 삭제나 기기 분실에 대비해 암호화 백업 파일과 복구 코드를 직접 챙길 수 있습니다.' },
+  { number: '03', label: '선택적 동기화', title: '필요할 때만 이어가는 연결', description: '여러 기기에서 기록을 이어 보고 싶을 때만 계정을 연결해 암호문을 동기화합니다. 계정 로그인과 금고 잠금 해제는 분리되어 있어 이메일 인증만으로 기록이 열리지 않습니다.' },
+];
+---
+<Base>
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="hero-kicker">개인 저널 · 로컬 우선 아키텍처</p>
+      <h1>오늘의 생각을,<br />온전한 나만의 기록으로.</h1>
+      <p class="hero-description">스쳐 가는 단상부터 오래 간직할 순간까지. 내 기기에서 기록과 사진을 먼저 암호화하는 개인 저널, Miroven입니다.</p>
+      <div class="hero-actions">
+        <Button href={site.appUrl} arrow>나의 기록 시작하기</Button>
+        <Button href="/ko/help/" secondary>처음 사용하기</Button>
+      </div>
+      <dl class="hero-specs">
+        <div>
+          <dt>시작 방식</dt>
+          <dd>로그인 없이 즉시 기록</dd>
+        </div>
+        <div>
+          <dt>보호 기준</dt>
+          <dd>기기 내 선(先) 암호화</dd>
+        </div>
+        <div>
+          <dt>기기 연결</dt>
+          <dd>선택적 암호문 동기화</dd>
+        </div>
+      </dl>
+    </div>
+    <ProductPreview />
+  </section>
+
+  <section id="about" class="section about-section">
+    <div class="wrap about-grid">
+      <div class="about-intro">
+        <p class="eyebrow">기록의 흐름과 구조</p>
+        <h2>쓰고, 돌아보고,<br />간직하는 기본에 충실하게.</h2>
+        <p>익숙한 타임라인에 하루를 남기는 간결함은 유지하면서, 기록이 저장되고 동기화되는 모든 과정은 사용자 기기를 중심으로 설계했습니다.</p>
+      </div>
+      <div class="features">
+        {features.map(feature => (
+          <div class="feature">
+            <div class="feature-meta">
+              <span class="feature-number">{feature.number}</span>
+              <span class="feature-label">{feature.label}</span>
+            </div>
+            <div class="feature-body">
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="privacy-section">
+    <div class="wrap privacy-grid">
+      <div class="privacy-copy">
+        <p class="eyebrow">투명한 보호 범위</p>
+        <h2>마음 놓고 쓰기 위해,<br />무엇을 지키는지부터 명확히.</h2>
+        <p>서버로 전송하기 전에 기록과 사진을 기기에서 암호화합니다. 동시에 암호화가 모든 정보를 숨기지는 않으므로, 서버가 처리하는 운영 메타데이터와 주의사항도 투명하게 안내합니다.</p>
+        <p>브라우저 저장소가 지워지거나 기기를 잃을 때를 대비해 암호화 백업 파일과 복구 코드를 별도로 보관해 주세요.</p>
+        <a class="text-link" href="/ko/security/">보호 범위와 한계 살펴보기<Icon name="arrow" /></a>
+      </div>
+      <div class="privacy-matrix" aria-label="데이터 보호 범위 요약">
+        <div class="matrix-card">
+          <div class="matrix-head protected">
+            <Icon name="lock" />
+            <strong>기기에서 암호화 (서버 평문 비전송)</strong>
+          </div>
+          <ul>
+            <li>작성한 일기 원문, 태그 및 프로필 정보</li>
+            <li>첨부한 사진 원본 및 썸네일 데이터</li>
+            <li>앱 잠금 PIN, 복구 코드 및 복호화 가능한 금고 키</li>
+          </ul>
+        </div>
+        <div class="matrix-card">
+          <div class="matrix-head">
+            <Icon name="shield" />
+            <strong>동기화 시 서버에 보이는 운영 정보</strong>
+          </div>
+          <ul>
+            <li>동기화 계정 이메일 주소 및 인증·세션 상태</li>
+            <li>접속·동기화 요청 시각 및 변경 이력 순서</li>
+            <li>암호화된 데이터의 식별자 및 암호문 크기</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-row">
+      <div>
+        <p class="eyebrow">아카이브</p>
+        <h2>기록 곁의 이야기</h2>
+      </div>
+      <a class="text-link" href="/ko/blog/">모든 글 보기<Icon name="arrow" /></a>
+    </div>
+    <div class="post-grid">{posts.map(post => <PostCard post={post} />)}</div>
+  </section>
+
+  <section class="closing wrap">
+    <div class="closing-inner">
+      <div>
+        <h2>나에게 남기고 싶은 하루가 있나요?</h2>
+        <p>Miroven 공식 앱에서 오늘의 기록을 시작해 보세요.</p>
+      </div>
+      <Button href={site.appUrl} arrow>나의 기록 시작하기</Button>
+    </div>
+  </section>
+</Base>

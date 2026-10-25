@@ -1,0 +1,44 @@
+---
+import Brand from './Brand.astro';
+import { site } from '../config/site';
+import { localeFromPath, languages } from '../i18n';
+const locale = localeFromPath(Astro.url.pathname);
+const english = locale === 'en';
+const t = (ko: string, en: string) => english ? en : ko;
+const alternate = (language: string) => /^\/(ko|en)\//.test(Astro.url.pathname) ? Astro.url.pathname.replace(/^\/(ko|en)\//, '/' + language + '/') : '/' + language + '/';
+---
+<footer class="site-footer">
+  <div class="footer wrap">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <Brand />
+        <p class="footer-tagline">{t('내 기기에서 먼저 암호화하는 개인 저널.', 'A personal journal encrypted on your device.')}<br />{t('일상의 생각과 사진을 나만의 타임라인에 남기세요.', 'Keep everyday thoughts and photos in your own timeline.')}</p>
+      </div>
+      <nav class="footer-columns" aria-label={t('하단 메뉴', 'Footer navigation')}>
+        <div class="footer-col">
+          <span class="footer-col-title">{t('제품 및 안내', 'Product and guides')}</span>
+          <a href={site.appUrl}>{t('웹 앱 열기 ↗', 'Open web app ↗')}</a>
+          <a href={'/' + locale + '/#about'}>{t('제품 소개', 'Product')}</a>
+          <a href={'/' + locale + '/blog/'}>{t('블로그', 'Blog')}</a>
+          <a href={'/' + locale + '/help/'}>{t('도움말', 'Help')}</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">{t('보안 및 정책', 'Security and policies')}</span>
+          <a href={'/' + locale + '/security/'}>{t('보안 안내', 'Security')}</a>
+          <a href={'/' + locale + '/terms/'}>{t('이용약관', 'Terms of Service')}</a>
+          <a href={'/' + locale + '/privacy/'}>{t('개인정보처리방침', 'Privacy Policy')}</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">{t('연결 및 언어', 'Contact and language')}</span>
+          {site.supportEmail && <a href={`mailto:${site.supportEmail}`}>{t('문의', 'Contact')} ({site.supportEmail})</a>}
+          {site.sourceUrl && <a href={site.sourceUrl}>{t('소스 코드 ↗', 'Source code ↗')}</a>}
+          {Object.entries(languages).map(([code, language]) => <a href={alternate(code)} lang={code} hreflang={code} aria-current={code === locale ? 'true' : undefined}>{language.label}</a>)}
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <small>© {new Date().getFullYear()} Miroven · {t('사이트 콘텐츠는', 'Site content:')} <a href={english ? 'https://creativecommons.org/licenses/by-nc/4.0/' : 'https://creativecommons.org/licenses/by-nc/4.0/deed.ko'} target="_blank" rel="noopener noreferrer">CC BY-NC 4.0</a> {t('적용 (상표 제외)', '(excluding trademarks)')}</small>
+      <small class="footer-domain"> {t('로컬 우선 · 종단간 기기 암호화 저널', 'Local first · End-to-end encrypted journal')}</small>
+    </div>
+  </div>
+</footer>
