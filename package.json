@@ -5,7 +5,7 @@
   "type": "module",
   "license": "Apache-2.0",
   "author": "mksdr",
-  "engines": { "node": ">=22.23.4" },
+  "engines": { "node": "^26.13.1" },
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "build": "astro build",

@@ -17,7 +17,7 @@ Astro로 만든 Miroven 공식 홈페이지입니다. 제품 소개, 한국어·
 
 ## 로컬 개발
 
-Node.js **22.23.4 이상**과 npm이 필요합니다. CI는 Node.js 24를 사용합니다. 명령은 이 저장소의 루트에서 실행합니다.
+Node.js **26.13.1 LTS**와 함께 제공되는 npm을 사용합니다. GitHub Actions와 Cloudflare Pages는 `.node-version`에서 버전을 읽습니다. fnm을 사용한다면 저장소 루트에서 `fnm install`과 `fnm use`를 실행한 뒤 아래 npm 명령을 실행하세요.
 
 ```sh
 npm ci
@@ -67,7 +67,7 @@ scripts/            테마 테스트와 빌드 산출물 검사
 
 한국어와 영어 콘텐츠를 함께 유지하세요.
 
-배포 대상은 **Cloudflare Pages**입니다. 빌드 명령은 `npm run build`, 출력 디렉터리는 `dist`입니다. GitHub는 소스 보관과 검증을 담당하며 현재 workflow에는 사이트 배포 단계가 없습니다.
+배포 대상은 **Cloudflare Pages**입니다. 빌드 명령은 `npm run build`, 출력 디렉터리는 `dist`입니다. Cloudflare 대시보드의 Preview 또는 Production에 `NODE_VERSION`을 지정했다면 `.node-version`과 일치시킵니다. GitHub는 소스 보관과 검증을 담당하고, Cloudflare Pages는 배포를 담당합니다.
 
 ## 문서
 

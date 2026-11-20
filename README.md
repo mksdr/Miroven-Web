@@ -17,7 +17,7 @@ This repository builds a static website. Journal editing, authentication, vault 
 
 ## Local development
 
-Use Node.js **22.23.4 or later** and npm. CI uses Node.js 24. Run commands from this repository's root directory.
+Use Node.js **26.13.1 LTS** and its bundled npm. GitHub Actions and Cloudflare Pages read the version from `.node-version`. If you use fnm, run `fnm install` and `fnm use` from the repository root before running the npm commands below.
 
 ```sh
 npm ci
@@ -67,7 +67,7 @@ Edit official URLs, the app link, source link, and support email in [`src/config
 
 Keep Korean and English content in sync.
 
-The deployment target is **Cloudflare Pages**, with `npm run build` as the build command and `dist` as the output directory. GitHub hosts source code and runs verification; the current workflow does not deploy the website.
+The deployment target is **Cloudflare Pages**, with `npm run build` as the build command and `dist` as the output directory. If `NODE_VERSION` is set in the Cloudflare dashboard for Preview or Production, match it to `.node-version`. GitHub hosts source code and runs verification. Cloudflare Pages handles deployment.
 
 ## Documentation
 
