@@ -2,9 +2,14 @@
 import Brand from './Brand.astro';
 import { site } from '../config/site';
 import { localeFromPath, languages } from '../i18n';
+import { publishedPosts } from '../lib/blog';
 const locale = localeFromPath(Astro.url.pathname);
 const english = locale === 'en';
 const t = (ko: string, en: string) => english ? en : ko;
+const otherLocale = english ? 'ko' : 'en';
+const blogSlug = Astro.url.pathname.startsWith(`/${locale}/blog/`) ? Astro.params.slug : undefined;
+const useBlogIndex = blogSlug !== undefined && !(await publishedPosts(otherLocale))
+  .some(post => post.id.split('/').pop() === blogSlug);
 const alternate = (language: string) => /^\/(ko|en)\//.test(Astro.url.pathname) ? Astro.url.pathname.replace(/^\/(ko|en)\//, '/' + language + '/') : '/' + language + '/';
 ---
 <footer class="site-footer">
@@ -32,7 +37,10 @@ const alternate = (language: string) => /^\/(ko|en)\//.test(Astro.url.pathname) 
           <span class="footer-col-title">{t('연결 및 언어', 'Contact and language')}</span>
           {site.supportEmail && <a href={`mailto:${site.supportEmail}`}>{t('문의', 'Contact')} ({site.supportEmail})</a>}
           {site.sourceUrl && <a href={site.sourceUrl}>{t('소스 코드 ↗', 'Source code ↗')}</a>}
-          {Object.entries(languages).map(([code, language]) => <a href={alternate(code)} lang={code} hreflang={code} aria-current={code === locale ? 'true' : undefined}>{language.label}</a>)}
+          {Object.entries(languages).map(([code, language]) => {
+            const linkToBlogIndex = code === otherLocale && useBlogIndex;
+            return <a href={linkToBlogIndex ? `/${code}/blog/` : alternate(code)} lang={code} hreflang={code} aria-current={code === locale ? 'true' : undefined}>{linkToBlogIndex ? (code === 'en' ? 'English blog' : '한국어 블로그') : language.label}</a>;
+          })}
         </div>
       </nav>
     </div>

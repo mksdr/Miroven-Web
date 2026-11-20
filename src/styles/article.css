@@ -11,6 +11,7 @@
 .prose > h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 .prose h3 { margin: 28px 0 10px; font-size: 1.125rem; font-weight: 600; line-height: 1.45; letter-spacing: -.015em; }
 .prose p { margin-bottom: 20px; color: var(--text-secondary); }
+.prose .apa-references > p { padding-inline-start: 0.5in; text-indent: -0.5in; }
 .prose strong { color: var(--text); font-weight: 600; }
 .prose a { color: var(--accent-link); text-decoration: underline; text-underline-offset: 4px; font-weight: 500; }
 .prose a:hover { text-decoration-thickness: 2px; }
