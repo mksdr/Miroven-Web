@@ -17,7 +17,7 @@ This repository builds a static website. Journal editing, authentication, vault 
 
 ## Local development
 
-Use Node.js **22.22.0 or later** and npm. CI uses Node.js 24. Run commands from this repository's root directory.
+Use Node.js **22.23.4 or later** and npm. CI uses Node.js 24. Run commands from this repository's root directory.
 
 ```sh
 npm ci
